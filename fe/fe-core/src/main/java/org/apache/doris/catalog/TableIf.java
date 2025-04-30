@@ -140,6 +140,17 @@ public interface TableIf {
 
     Column getColumn(String name);
 
+    default int getBaseColumnIdxByName(String colName) {
+        int i = 0;
+        for (Column col : getBaseSchema()) {
+            if (col.getName().equalsIgnoreCase(colName)) {
+                return i;
+            }
+            ++i;
+        }
+        return -1;
+    }
+
     String getMysqlType();
 
     String getEngine();
